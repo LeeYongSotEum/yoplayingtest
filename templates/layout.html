@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<style>
+@import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Yeon+Sung&display=swap');
+
+
+    body {
+        font-family: Nanum Pen Script;
+<!--        text-align:center;-->
+    }
+
+    a { text-decoration:none }
+    .border {
+        margin: auto;
+        padding-top: 5px;
+        padding-bottom: 30px;
+        background-color: #F2F2F2;
+        max-width:700px;
+        min-width:400px;
+        min-height:400px;
+        border-radius: 20px;
+        font-family: 'Yeon Sung', cursive;
+    }
+    .file-upload {
+      background-color: #F2F2F2;
+      width: 300px;
+      border-radius: 30px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .file-upload-content {
+      display: none;
+      text-align: center;
+    }
+
+    .file-upload-input {
+      position: absolute;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      outline: none;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .image-upload-wrap {
+      margin-top: 20px;
+      border: 2px dashed #35465d;
+      border-radius: 10px;
+      position: relative;
+    }
+
+    .image-dropping,
+    .image-upload-wrap:hover {
+      background-color: #C0C0C0;
+      border: 2px dashed #35465d;
+    }
+
+    .image-title-wrap {
+      padding: 0 15px 15px 15px;
+      color: #222;
+    }
+
+    .drag-text {
+      font-size: 25px;
+      text-align: center;
+    }
+
+    .drag-text h3 {
+      font-weight: 100;
+      text-transform: uppercase;
+      color: #35465d;
+      padding: 60px 0;
+    }
+
+    .file-upload-image {
+      width: auto;
+      height: auto;
+      max-height: 200px;
+      max-width: 200px;
+      margin: auto;
+      padding: 20px;
+    }
+    .progress-sec {
+        text-align: center;
+    }
+    .addthis_inline_share_toolbox_oh71{
+        max-width: 200px;
+        margin: 0 auto;
+    }
+    .remove-image {
+      width: 200px;
+      margin: 0;
+      color: #fff;
+      background: #35465d;
+      border: none;
+      padding: 10px;
+      border-radius: 10px;
+      border-bottom: 4px solid #3546C0;
+      transition: all .2s ease;
+      outline: none;
+      text-transform: uppercase;
+      font-weight: 700;
+      font-family:  'Yeon Sung', cursive;
+      font-size: 25px;
+    }
+
+    .remove-image:hover {
+      background: #c13b2a;
+      color: #ffffff;
+      transition: all .2s ease;
+      cursor: pointer;
+    }
+
+    .remove-image:active {
+      border: 0;
+      transition: all .2s ease;
+    }
+    .progress {
+      width: 300px;
+      height: 30px;
+    }
+    .progress-wrap1 {
+      background: #f80;
+      margin: 20px auto;
+      overflow: hidden;
+      position: relative;
+      border-radius: 10px;
+    }
+    .progress-wrap2 {
+      background: #F7EF08;
+      margin: 20px auto;
+      overflow: hidden;
+      position: relative;
+      border-radius: 10px;
+    }
+    .progress-wrap3 {
+      background: #0CD07B;
+      margin: 20px auto;
+      overflow: hidden;
+      position: relative;
+      border-radius: 10px;
+    }
+    .progress-wrap4 {
+      background: #3092E8;
+      margin: 20px auto;
+      overflow: hidden;
+      position: relative;
+      border-radius: 10px;
+    }
+    .progress-wrap5 {
+      background: #BD22ED;
+      margin: 20px auto;
+      overflow: hidden;
+      position: relative;
+      border-radius: 10px;
+    }
+    .progress-bar1 {
+        background: #ddd;
+        left: 0;
+        position: absolute;
+        top: 0;
+    }
+    .progress-bar2 {
+        background: #ddd;
+        left: 0;
+        position: absolute;
+        top: 0;
+    }
+    .progress-bar3 {
+        background: #ddd;
+        left: 0;
+        position: absolute;
+        top: 0;
+    }
+    .progress-bar4 {
+        background: #ddd;
+        left: 0;
+        position: absolute;
+        top: 0;
+    }
+    .progress-bar5 {
+        background: #ddd;
+        left: 0;
+        position: absolute;
+        top: 0;
+    }
+
+
+    li.sidebar-item a.active{
+        color: #00bcd4!important;
+    }
+
+
+    .side-nav-push {
+        position: relative;
+        left: 0;
+        right: 0;
+    }
+    .side-nav-push, .side-nav {
+        -webkit-transition: 280ms linear all;
+        -o-transition: 280ms linear all;
+        transition: 280ms linear all;
+    }
+    .side-nav-open {
+        -webkit-box-shadow: 10px 0 10px -10px rgba(0, 0, 0, 0.35);
+        box-shadow: 10px 0 10px -10px  rgba(0, 0, 0, 0.35);
+    }
+    /* ------- Menu Bars ------- */
+
+    #menu_bars {
+        padding: 5px;
+        width: 38px;
+        cursor: pointer;
+        position: absolute;
+        z-index: 1102;
+    }
+    #menu_bars, #menu_bars span{
+        -webkit-transition: 300ms linear all;
+        -o-transition: 300ms linear all;
+        transition: 300ms linear all;
+    }
+    .navbar-toggle-visible #menu_bars {
+        top: 80px;
+    }
+    .navbar-toggle-visible #menu_bars.active {
+        top: 75px;
+    }
+    #menu_bars.active {
+        position: fixed;
+        height: 36px;
+    }
+    #menu_bars span {
+        width: 30px;
+        background: #333333;
+        height: 1px;
+        display: block;
+        margin: 0 auto;
+    }
+    .navbar-toggle-visible #menu_bars span{
+        background: #333333;
+    }
+    #menu_bars span:nth-child(1),
+    #menu_bars span:nth-child(3) {
+        width: 30px;
+        margin: 0 auto;
+    }
+    #menu_bars span:nth-child(2) {
+        margin: 5px 0;
+    }
+    #menu_bars:hover span:nth-child(1) {
+        width: 20px;
+        margin: 0 auto;
+    }
+    #menu_bars:hover span:nth-child(3) {
+        width: 10px;
+        margin: 0 auto;
+    }
+    #menu_bars.active span:nth-child(2) {
+        display: none;
+    }
+    #menu_bars.active span:nth-child(1),
+    #menu_bars.active span:nth-child(3){
+        width: 30px;
+        top: 20px;
+        position: absolute;
+        left: 5px;
+        margin-top: -1px;
+    }
+    #menu_bars.active span:nth-child(1) {
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        -o-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+    #menu_bars.active span:nth-child(3) {
+        -webkit-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+        -o-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+    }
+
+    /* ------- Menu Bars Left ------- */
+
+    .side-nav.side-nav-left.side-nav-open {
+        -webkit-transition: 230ms linear all;
+        -o-transition: 230ms linear all;
+        transition: 230ms linear all;
+    }
+    .navbar-toggle-visible #menu_bars.left {
+        left: 14px;
+        transition: 0.3s;
+    }
+    .navbar-toggle-visible #menu_bars.left.active {
+        left: 140px;
+        transition: 0.4s;
+    }
+
+    /* ------- Side Nav ------- */
+
+    .navbar-toggle-visible {
+        width: 70px;
+        background: #fff;
+        position: fixed;
+        right: 0;
+        top: 0;
+        height: 100px;
+        z-index: 800;
+    }
+    .side-nav {
+        height: 100vh !important;
+        background: #fff;
+        padding: 55px 30px;
+        width: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 900;
+        position: relative;
+        overflow: hidden !important;
+        visibility: hidden;
+    }
+    .side-nav-inner-setting {
+        margin: 50px auto;
+    }
+    .side-nav-open {
+        visibility: visible;
+    }
+    .side-nav .side-nav-list li {
+        display: block;
+        width: 100%;
+        opacity: 0;
+        visibility: hidden;
+        position: relative;
+        -webkit-transition-timing-function: ease-in-out;
+        transition-timing-function: ease-in-out;
+    }
+    .side-nav .side-nav-list li > a {
+        display: block;
+        font-size: 25px;
+        font-weight: 300;
+        color: #6f6f6f;
+        margin: 10px 0;
+        position: relative;
+        text-transform: capitalize;
+    }
+    .side-nav .side-nav-list li > a:hover {
+        color: #00bcd4;
+    }
+    .side-nav .side-nav-list li > a:active, .side-nav .side-nav-list li > a:focus {
+        color: #00bcd4;
+    }
+    .side-nav.side-nav-open .side-nav-list li {
+        visibility: visible;
+    }
+    .side-nav.side-nav-open  li {
+        -webkit-transition-duration: 300ms;
+        transition-duration: 300ms;
+        -webkit-transition-property: all;
+        transition-property: all;
+        -webkit-transition-timing-function: ease-in-out;
+        transition-timing-function: ease-in-out;
+        opacity: 1;
+    }
+    .side-nav.bottom-share{
+        text-align: center;
+        visibility: hidden;
+        opacity: 0;
+        bottom: 0;
+        padding-bottom: 50px;
+        position: absolute;
+    }
+    .nav-copyright {
+        text-align: left;
+        bottom: 30px;
+    }
+    .side-nav.side-nav-open .bottom-share{
+        visibility: visible;
+        opacity: 1;
+    }
+    /* ------- Side Nav Left ------- */
+    .navbar-toggle-visible.left {
+        left: 0; right: auto;
+        /* -webkit-box-shadow: 10px 0 10px -10px rgba(0, 0, 0, 0.35);
+        box-shadow: 10px 0 10px -10px rgba(0, 0, 0, 0.35); */
+    }
+    .side-nav-left.slide-nav{
+        left: -180px;
+    }
+    .side-nav-left.slide-nav.side-nav-open{
+        left: 0;
+        width: 180px;
+    }
+    .side-nav.side-nav-left .side-nav-list {
+        max-width: 180px;
+        margin: 0 auto;
+    }
+    .side-nav.side-nav-left .side-nav-list li {
+        -webkit-transform: translate3d(-100px, 0px, 0px);
+        transform: translate3d(-100px, 0px, 0px);
+    }
+    .side-nav.side-nav-left li > a:hover {
+        margin-left: 10px;
+    }
+    .side-nav.side-nav-left .social_icon li > a:hover,.side-nav.side-nav-right .social_icon li > a:hover  {
+        margin: 0;
+    }
+    .side-nav.side-nav-left .side-nav-list li > a:active, .side-nav.side-nav-left  .side-nav-list li > a:focus {
+        margin-left: 10px;
+    }
+    .side-nav.side-nav-left.side-nav-open li {
+        -webkit-transform: translate3d(0px, 0px, 0px);
+        transform: translate3d(0px, 0px, 0px);
+    }
+    .side-nav.side-nav-left .side-nav-list .side-nav-open li {
+        transition: all linear !important;
+    }
+    .side-nav.side-nav-left .side-nav-list li:nth-child(n+1) {
+        -webkit-transition-delay: .1s;
+        transition-delay: .1s;
+    }
+    .side-nav.side-nav-left .side-nav-list li:nth-child(n+2) {
+        -webkit-transition-delay: .15s;
+        transition-delay: .15s;
+    }
+    .side-nav.side-nav-left .side-nav-list li:nth-child(n+3) {
+        -webkit-transition-delay: .2s;
+        transition-delay: .2s;
+    }
+    .side-nav.side-nav-left .side-nav-list li:nth-child(n+4) {
+        -webkit-transition-delay: .25s;
+        transition-delay: .25s;
+    }
+    .side-nav.side-nav-left .side-nav-list li:nth-child(n+5) {
+        -webkit-transition-delay: .30s;
+        transition-delay: .30s;
+    }
+    .side-nav.side-nav-left .side-nav-list li:nth-child(n+6) {
+        -webkit-transition-delay: .35s;
+        transition-delay: .35s;
+    }
+    .side-nav.side-nav-left .side-nav-list li:nth-child(n+7) {
+        -webkit-transition-delay: .40s;
+        transition-delay: .40s;
+    }
+    .side-nav.side-nav-left .side-nav-list li:nth-child(n+8) {
+        -webkit-transition-delay: .45s;
+        transition-delay: .45s;
+    }
+
+    .container {
+        margin: 50px 80px;
+    }
+    .nav {
+        float: left;
+    }
+    .css-typing1{
+      color: #000;
+      margin: 1px 5px auto;
+      position: relative;
+      font-size: 23px;
+      text-align:  left;
+      vertical-align: middle;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 40em;
+      animation: type 4s steps(60, end);
+    }
+    .css-typing2{
+      color: #000;
+      margin: 1px 5px auto;
+      position: relative;
+      font-size: 23px;
+      text-align:  left;
+      vertical-align: middle;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 40em;
+      animation: type 4s steps(60, end);
+    }
+    .css-typing3{
+      color: #000;
+      margin: 1px 5px auto;
+      position: relative;
+      font-size: 23px;
+      text-align:  left;
+      vertical-align: middle;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 40em;
+      animation: type 4s steps(60, end);
+    }
+    .css-typing4{
+      color: #000;
+      margin: 1px 5px auto;
+      position: relative;
+      font-size: 23px;
+      text-align:  left;
+      vertical-align: middle;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 40em;
+      animation: type 4s steps(60, end);
+    }
+    .css-typing5{
+      color: #000;
+      margin: 1px 5px auto;
+      position: relative;
+      font-size: 23px;
+      text-align:  left;
+      vertical-align: middle;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 40em;
+      animation: type 4s steps(60, end);
+    }
+    @keyframes type{
+      0%{width: 0;}
+      50%{width: 0;}
+      100%{ width: 100; }
+    }
+    .title {
+        font-size:50px;
+        line-height: 1.67;
+        text-align: center;
+        color: #35465d;
+    }
+    .subtitle {
+        font-size:35px;
+        line-height: 1.53;
+        text-align: center;
+        color: #35465d;
+    }
+    .loader{
+<!--      margin: 0 0 2em;-->
+      height: 100px;
+      width: 100%;
+      text-align: center;
+      float: center;
+<!--      padding: 1em;-->
+      margin: 0 auto 1em;
+      display: inline-block;
+      vertical-align: top;
+    }
+    .result_message{
+        text-align: center;
+    }
+    header{
+        margin: auto;
+        border: 2px dashed #35465d;
+        border-radius: 10px;
+        width:300px;
+        text-align: center;
+        vertical-align: middle;
+        height:100px;
+        font-size: 80px;
+    }
+    .footer {
+        text-align:center;
+        height: 50px;
+        margin-top: -50px;
+    }
+</style>
+<style>
+    {% block style %}{% endblock %}
+</style>
+
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ed45dc2d22ab8dc"></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    
+    {% if title %}
+    <title>YoPlaying ! - {{ title }}</title>
+    {% else %}
+    <title>Flask Blog</title>
+    {% endif %}
+</head>
+<body onload="noBack()" onpageshow="if (event.persisted) noBack();" onunload="" ondragstart="return false">
+<!--<body oncontextmenu="return false;">-->
+<script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<header>
+    <a href="/" style="color:black">YoPlaying</a>
+</header>
+<nav>
+    <div class="sidebar-block mt-100">
+        <div class="navbar-toggle-visible left">
+            <div id="menu_bars" class="left active"> <span></span> <span></span> <span></span> </div>
+            <div class="web-sidebar">
+                <div class="sidebar-items">
+                    <nav class="side-nav side-nav-left slide-nav static-nav side-nav-open">
+                        <div class="side-nav-inner-setting">
+                            <ul class="list-unstyled side-nav-list">
+
+                                <li class="sidebar-item clearfix">
+                                    <a href="/" class="gray">
+                                        Home
+                                    </a>
+
+                                </li>
+                                <li class="sidebar-item clearfix">
+
+                                    <a href="/lotto_number" class="gray ">
+                                        Lotto Number
+                                    </a>
+
+                                </li>
+<!--                                <li class="sidebar-item clearfix">-->
+
+<!--                                    <a href="/face_detector" class="gray ">-->
+<!--                                        Man Face-->
+<!--                                    </a>-->
+
+<!--                                </li>-->
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <!-- Main content block-->
+    {% block content %}{% endblock %}
+</div>
+<footer class='footer'>
+<!--    <div class='ad-banner'>-->
+<!--        <ins class="kakao_ad_area" style="display:none;" data-ad-unit="DAN-uvbfy48mm0yr" data-ad-width="320" data-ad-height="100"></ins> -->
+<!--        <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>-->
+<!--    </div>-->
+<!--    <div>-->
+        <P>
+            &copy; 요플레잉 YoPlaying 2020. All Rights Reserved.
+        </P>
+    </div>
+</footer>
+</body>
+<!--
+Copyright (c) 2020 by Aurer (https://codepen.io/aurer/pen/jEGbA)
+Copyright (c) 2020 by FinByz Tech Pvt. Ltd. (https://codepen.io/finbyz/pen/zYOmNqx)
+Copyright (c) 2020 by Aaron Vanston (https://codepen.io/aaronvanston/pen/yNYOXR)
+Copyright (c) 2020 by Stephen Fairbanks (https://codepen.io/thathurtabit/pen/ymECf)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+-->
+</html>
+<script type="text/javascript">
+window.history.forward();
+function noBack(){window.history.forward();}
+</script>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.loader').hide();
+        $('.sidebar-item a').each(function (index) {
+            if (this.href.trim() == window.location)
+                $(this).addClass("active");
+        });
+        /* ===================================
+        SideBar Menu On click
+        ====================================== */
+        var $menu_left = $(".side-nav-left");
+        var $toggler = $("#menu_bars");
+        if ($("#menu_bars").length) {
+            $("#side-nav").addClass("side-nav-push");
+
+            if ($toggler.hasClass("left")) {
+                $toggler.on("click", function (e) {
+                    $(this).toggleClass("active");
+
+                    $menu_left.toggleClass("side-nav-open");
+                    e.stopPropagation();
+                });
+            }
+            else {
+                if ($toggler.hasClass("full")) {
+                    $toggler.on("click", function (e) {
+                        $(this).toggleClass("active");
+                        $menu_full.toggleClass("side-nav-open");
+                        e.stopPropagation();
+                    });
+                }
+            }
+        }
+    });
+</script>
