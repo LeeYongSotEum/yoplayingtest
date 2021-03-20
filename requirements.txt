@@ -8,7 +8,7 @@ icc-rt==2019.0
 intel-numpy==1.15.1
 intel-openmp==2019.0
 itsdangerous==1.1.0
-Jinja2==2.11.2
+Jinja2==2.11.3
 kiwisolver==1.1.0
 MarkupSafe==1.1.1
 mkl==2019.0
