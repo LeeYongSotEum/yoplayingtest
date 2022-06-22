@@ -14,7 +14,7 @@ MarkupSafe==1.1.1
 mkl==2019.0
 mkl-fft==1.0.6
 mkl-random==1.0.1
-numpy==1.15.1
+numpy==1.22.0
 opencv-python==4.2.0.32
 pandas==0.24.2
 pyparsing==2.4.7
